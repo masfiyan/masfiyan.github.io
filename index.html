@@ -1,0 +1,1227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muhammad Asfiyan · Odoo Consultant</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Odoo Technical & Functional Consultant: custom modules and integrations for Manufacturing, Inventory and POS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one readable column of sections; the hero pairs the pitch with a live-looking Odoo screen,
+   and a tabbed "screens" band shows the apps in use. Odoo UI mockups keep their own light palette. */
+:root {
+  --bg: #f6f5f8;
+  --surface: #ffffff;
+  --ink: #1e1a24;
+  --muted: #5f586a;
+  --line: #e2dee8;
+  --plum: #714b67;
+  --plum-ink: #ffffff;
+  --plum-soft: #f2ebf1;
+  --teal: #017e84;
+  --teal-soft: #e3f3f3;
+  --shadow: 0 1px 2px rgb(30 26 36 / .06), 0 12px 32px -12px rgb(30 26 36 / .18);
+
+  /* Odoo screen mockups: constant in both themes, like a screenshot */
+  --s-bg: #ffffff;
+  --s-sheet: #f9fafb;
+  --s-ink: #1f2937;
+  --s-muted: #6b7280;
+  --s-line: #e5e7eb;
+  --s-nav: #714b67;
+  --s-nav-ink: #ffffff;
+  --s-btn: #714b67;
+  --s-ok: #28a745;
+  --s-ok-soft: #e6f4ea;
+  --s-warn: #b7791f;
+  --s-warn-soft: #fdf3e1;
+  --s-info: #017e84;
+  --s-info-soft: #e3f3f3;
+  --s-danger: #c0392b;
+  --s-danger-soft: #fbe9e7;
+
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141218; --surface: #1d1a22; --ink: #eeeaf2; --muted: #a8a0b2; --line: #2f2a36;
+    --plum: #c99bbd; --plum-ink: #1d1a22; --plum-soft: #2b2030; --teal: #55c4c9; --teal-soft: #15292b;
+    --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 16px 40px -16px rgb(0 0 0 / .6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141218; --surface: #1d1a22; --ink: #eeeaf2; --muted: #a8a0b2; --line: #2f2a36;
+  --plum: #c99bbd; --plum-ink: #1d1a22; --plum-soft: #2b2030; --teal: #55c4c9; --teal-soft: #15292b;
+  --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 16px 40px -16px rgb(0 0 0 / .6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 16px/1.6 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+p { margin: 0; }
+
+.wrap {
+  max-width: 1160px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.section { padding-block: 88px; }
+.section + .section { border-top: 1px solid var(--line); }
+.eyebrow {
+  font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--teal); display: block; margin-bottom: 14px;
+}
+.section-head { display: grid; gap: 14px; max-width: 680px; margin-bottom: 44px; }
+.section-head h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; font-weight: 700; }
+.section-head p { color: var(--muted); font-size: 17px; }
+
+/* ---------- Header ---------- */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; gap: 24px; padding-block: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; white-space: nowrap; }
+.brand-mark {
+  width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--plum); color: var(--plum-ink); font: 700 13px/1 var(--f-display);
+}
+.nav { display: flex; gap: 22px; margin-left: auto; font-size: 14px; }
+.nav a { text-decoration: none; color: var(--muted); }
+.nav a:hover { color: var(--ink); }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; border-radius: 6px;
+  padding: 10px 16px; font: 600 14px/1 var(--f-body); text-decoration: none; cursor: pointer;
+  border: 1px solid transparent; transition: transform .15s ease, background .15s ease;
+}
+.btn-primary { background: var(--plum); color: var(--plum-ink); }
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-ghost { border-color: var(--line); color: var(--ink); background: var(--surface); }
+.btn-ghost:hover { border-color: var(--muted); }
+@media (max-width: 860px) { .nav { display: none; } .top .btn { margin-left: auto; } }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: 72px 80px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 56px; align-items: center; }
+.hero h1 { font-size: clamp(38px, 5.4vw, 64px); line-height: 1.02; font-weight: 800; letter-spacing: -0.03em; }
+.hero h1 em { font-style: normal; color: var(--plum); }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.role { font: 500 13px/1.4 var(--f-mono); color: var(--muted); letter-spacing: .02em; }
+.lede { font-size: 18px; color: var(--muted); max-width: 34em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); margin-top: 6px; }
+.fact { padding: 16px 12px 0 0; display: grid; gap: 2px; }
+.fact b { font: 700 26px/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
+.fact span { font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+.hero-visual { position: relative; min-width: 0; padding: 0 0 36px 36px; }
+.hero-visual .win.back {
+  position: absolute; left: 0; bottom: 0; width: 58%; z-index: 0; transform: rotate(-2deg);
+}
+.hero-visual .win.front { position: relative; z-index: 1; }
+@media (max-width: 960px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 44px; }
+  .hero-visual { padding: 0; }
+  .hero-visual .win.back { display: none; }
+}
+@media (max-width: 520px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; } }
+
+/* ---------- Odoo screen mockups ---------- */
+.win {
+  background: var(--s-bg); color: var(--s-ink); border-radius: 10px; overflow: hidden;
+  box-shadow: var(--shadow); border: 1px solid var(--line);
+  font: 400 12px/1.45 var(--f-body);
+}
+.win-nav { display: flex; align-items: center; gap: 16px; background: var(--s-nav); color: var(--s-nav-ink); padding: 8px 14px; white-space: nowrap; overflow: hidden; }
+.win-nav .grid-ico { width: 14px; height: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; flex: none; }
+.win-nav .grid-ico i { background: var(--s-nav-ink); opacity: .85; border-radius: 1px; }
+.win-nav b { font-weight: 600; }
+.win-nav span { opacity: .85; }
+.win-cp { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 14px; border-bottom: 1px solid var(--s-line); }
+.crumb { color: var(--s-muted); }
+.crumb b { color: var(--s-ink); font-weight: 600; }
+.s-btn { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: 600; font-size: 11.5px; border: 1px solid var(--s-line); background: var(--s-bg); color: var(--s-ink); white-space: nowrap; }
+.s-btn.primary { background: var(--s-btn); border-color: var(--s-btn); color: var(--s-nav-ink); }
+.statusbar { display: flex; margin-left: auto; font-size: 11px; }
+.statusbar span { padding: 3px 12px 3px 14px; background: var(--s-sheet); border: 1px solid var(--s-line); margin-left: -1px; color: var(--s-muted); clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 50%, calc(100% - 7px) 100%, 0 100%, 7px 50%); }
+.statusbar span:first-child { clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 50%, calc(100% - 7px) 100%, 0 100%); }
+.statusbar span.on { background: var(--s-info-soft); color: var(--s-info); font-weight: 600; border-color: var(--s-info); }
+.win-body { padding: 14px; background: var(--s-sheet); }
+.sheet { background: var(--s-bg); border: 1px solid var(--s-line); border-radius: 6px; padding: 16px; display: grid; gap: 12px; }
+.ref { font: 700 19px/1.2 var(--f-body); color: var(--s-ink); }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 22px; }
+.fld { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 8px; }
+.fld dt { color: var(--s-ink); font-weight: 600; }
+.fld dd { margin: 0; color: var(--s-ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fld dd a { color: var(--s-info); text-decoration: none; }
+.tabs-s { display: flex; gap: 2px; border-bottom: 1px solid var(--s-line); }
+.tabs-s span { padding: 5px 12px; color: var(--s-muted); border: 1px solid transparent; border-bottom: none; border-radius: 4px 4px 0 0; }
+.tabs-s span.on { color: var(--s-ink); border-color: var(--s-line); background: var(--s-bg); margin-bottom: -1px; font-weight: 600; }
+.tbl-wrap { overflow-x: auto; }
+table.s { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+table.s th { text-align: left; font-weight: 600; color: var(--s-ink); padding: 6px 8px; border-bottom: 1px solid var(--s-line); white-space: nowrap; }
+table.s td { padding: 6px 8px; border-bottom: 1px solid var(--s-line); white-space: nowrap; }
+table.s td.num, table.s th.num { text-align: right; }
+table.s tr.total td { font-weight: 700; border-bottom: none; }
+table.s tr.sub td { font-weight: 600; background: var(--s-sheet); }
+.mono { font-family: var(--f-mono); font-size: 11px; }
+.pill { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 10.5px; font-weight: 600; }
+.pill.ok { background: var(--s-ok-soft); color: var(--s-ok); }
+.pill.warn { background: var(--s-warn-soft); color: var(--s-warn); }
+.pill.info { background: var(--s-info-soft); color: var(--s-info); }
+.pill.danger { background: var(--s-danger-soft); color: var(--s-danger); }
+.bar { height: 6px; background: var(--s-line); border-radius: 3px; overflow: hidden; min-width: 60px; }
+.bar i { display: block; height: 100%; background: var(--s-info); border-radius: 3px; }
+.red { color: var(--s-danger); }
+.muted-s { color: var(--s-muted); }
+@media (max-width: 560px) {
+  .fields { grid-template-columns: minmax(0, 1fr); }
+  .statusbar { margin-left: 0; }
+  .hide-sm { display: none; }
+}
+
+/* POS mockup */
+.pos { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); min-height: 330px; background: var(--s-sheet); position: relative; }
+.pos-order { background: var(--s-bg); border-right: 1px solid var(--s-line); display: flex; flex-direction: column; }
+.pos-line { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 8px; padding: 8px 12px; border-bottom: 1px solid var(--s-line); }
+.pos-line small { grid-column: 1 / -1; color: var(--s-muted); }
+.pos-line.sel { background: var(--s-info-soft); }
+.pos-total { margin-top: auto; padding: 12px; display: flex; justify-content: space-between; font: 700 16px/1 var(--f-body); border-top: 1px solid var(--s-line); }
+.pos-grid { padding: 12px; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; align-content: start; }
+.pos-tile { background: var(--s-bg); border: 1px solid var(--s-line); border-radius: 6px; overflow: hidden; }
+.pos-tile i { display: block; height: 46px; }
+.pos-tile div { padding: 6px 8px; display: grid; }
+.pos-tile b { font-weight: 600; font-size: 11px; line-height: 1.25; }
+.pos-tile span { color: var(--s-muted); font-size: 10.5px; }
+.pos-modal {
+  position: absolute; right: 18px; top: 50%; transform: translateY(-50%); width: min(270px, 70%);
+  background: var(--s-bg); border-radius: 8px; box-shadow: 0 18px 40px -10px rgb(0 0 0 / .35); border: 1px solid var(--s-line);
+}
+.pos-modal header { padding: 10px 14px; font-weight: 700; border-bottom: 1px solid var(--s-line); }
+.pos-modal .body { padding: 12px 14px; display: grid; gap: 10px; }
+.pin { display: flex; gap: 8px; justify-content: center; }
+.pin i { width: 10px; height: 10px; border-radius: 50%; background: var(--s-ink); }
+.pin i.e { background: var(--s-line); }
+.pos-modal footer { display: flex; gap: 8px; justify-content: flex-end; padding: 10px 14px; border-top: 1px solid var(--s-line); }
+@media (max-width: 560px) { .pos { grid-template-columns: minmax(0, 1fr); } .pos-grid { display: none; } .pos-modal { position: static; transform: none; width: auto; margin: 12px; } }
+
+/* ---------- Apps ribbon ---------- */
+.apps { display: flex; flex-wrap: wrap; gap: 10px; }
+.app {
+  display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px 10px 10px;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-weight: 500;
+}
+.app i { width: 28px; height: 28px; border-radius: 6px; display: grid; place-items: center; font: 700 12px/1 var(--f-display); font-style: normal; color: #fff; }
+.app small { color: var(--muted); font-weight: 400; }
+
+/* ---------- Services ---------- */
+.services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.svc { background: var(--surface); padding: 28px 26px; display: grid; gap: 12px; align-content: start; }
+.svc .q { font: 500 13px/1.4 var(--f-mono); color: var(--plum); }
+.svc h3 { font-size: 21px; font-weight: 700; line-height: 1.2; }
+.svc p { color: var(--muted); font-size: 15px; }
+.svc ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.svc li { font-size: 12px; padding: 3px 8px; border-radius: 4px; background: var(--plum-soft); color: var(--ink); }
+@media (max-width: 960px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .services { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Screens gallery ---------- */
+.gallery { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 36px; align-items: start; }
+.g-tabs { display: grid; gap: 4px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px); }
+.g-tab {
+  text-align: left; background: none; border: 1px solid transparent; border-radius: 8px; padding: 12px 14px;
+  font: 500 15px/1.3 var(--f-body); color: var(--muted); cursor: pointer; display: grid; gap: 3px;
+}
+.g-tab small { font-size: 12.5px; font-weight: 400; color: var(--muted); }
+.g-tab:hover { color: var(--ink); }
+.g-tab[aria-selected="true"] { background: var(--surface); border-color: var(--line); color: var(--ink); box-shadow: var(--shadow); }
+.g-panel { display: grid; gap: 14px; min-width: 0; }
+.g-panel .caption { color: var(--muted); font-size: 14.5px; max-width: 62ch; }
+.note { margin-top: 28px; font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; }
+.note::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex: none; transform: translateY(-1px); }
+@media (max-width: 860px) {
+  .gallery { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .g-tabs { position: static; display: flex; overflow-x: auto; gap: 6px; padding-bottom: 4px; }
+  .g-tab { white-space: nowrap; padding: 8px 12px; }
+  .g-tab small { display: none; }
+}
+
+/* ---------- Process (Odoo statusbar) ---------- */
+.process { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.step { display: grid; gap: 14px; align-content: start; }
+.step .chev {
+  background: var(--surface); border: 1px solid var(--line); padding: 10px 18px 10px 22px; margin-left: -1px;
+  font: 600 14px/1.2 var(--f-body); white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+}
+.step:first-child .chev { clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); border-radius: 6px 0 0 6px; padding-left: 16px; }
+button.chev { color: var(--ink); cursor: pointer; text-align: left; transition: background .25s ease, color .25s ease; }
+button.chev:hover { background: var(--plum-soft); }
+.step.on .chev { background: var(--plum); color: var(--plum-ink); border-color: var(--plum); }
+.step.on p { color: var(--ink); }
+.step p { font-size: 14px; color: var(--muted); padding-right: 16px; }
+@media (max-width: 960px) {
+  .process { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
+}
+@media (max-width: 560px) {
+  .process { grid-template-columns: minmax(0, 1fr); row-gap: 18px; }
+  .step .chev, .step:first-child .chev { clip-path: none; border-radius: 6px; margin-left: 0; display: inline-block; }
+}
+
+/* ---------- Experience ---------- */
+.xp { display: grid; gap: 0; }
+.job { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; padding-block: 30px; border-top: 1px solid var(--line); }
+.job:last-child { border-bottom: 1px solid var(--line); }
+.when { font: 500 13px/1.5 var(--f-mono); color: var(--muted); }
+.when b { display: block; color: var(--teal); font-weight: 500; }
+.job h3 { font-size: 22px; font-weight: 700; }
+.job .org { color: var(--muted); margin-top: 2px; }
+.job ul { margin: 14px 0 0; padding-left: 18px; display: grid; gap: 6px; max-width: 70ch; }
+.job li::marker { color: var(--plum); }
+.job.minor h3 { font-size: 18px; }
+@media (max-width: 720px) { .job { grid-template-columns: minmax(0, 1fr); gap: 10px; } }
+
+/* ---------- Integrations + toolkit ---------- */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; }
+@media (max-width: 860px) { .two { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
+.int-list { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.int { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding-block: 14px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.int b { font: 700 19px/1.2 var(--f-display); }
+.int span { font: 500 12px/1 var(--f-mono); color: var(--teal); text-transform: uppercase; letter-spacing: .06em; }
+.int p { grid-column: 1 / -1; color: var(--muted); font-size: 14px; }
+.kit { display: grid; gap: 20px; }
+.kit h3 { font: 500 12px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { font-size: 13.5px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+
+/* ---------- Education strip ---------- */
+.edu { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; padding: 22px 24px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.edu b { font: 700 18px/1.3 var(--f-display); }
+.edu span { color: var(--muted); }
+
+/* ---------- Contact ---------- */
+.contact { background: var(--plum-soft); }
+.contact .wrap { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 48px; align-items: start; }
+.contact h2 { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.05; font-weight: 800; letter-spacing: -0.025em; }
+.contact .lede { margin-top: 18px; }
+.contact-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 4px; box-shadow: var(--shadow); }
+.c-row { display: grid; grid-template-columns: 82px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.c-row:last-of-type { border-bottom: none; }
+.c-row dt { font: 500 12px/1 var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.c-row dd { margin: 0; overflow-wrap: anywhere; font-weight: 500; }
+.c-row dd a { text-decoration: none; border-bottom: 1px solid var(--line); }
+.copy { font: 500 12px/1 var(--f-body); background: none; border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; cursor: pointer; color: var(--muted); }
+.copy:hover { color: var(--ink); border-color: var(--muted); }
+.c-empty { color: var(--muted); font-size: 14px; padding: 8px 0; }
+@media (max-width: 860px) { .contact .wrap { grid-template-columns: minmax(0, 1fr); } }
+
+footer.foot { padding-block: 28px; font-size: 13px; color: var(--muted); }
+footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+/* ================= Interactive layer ================= */
+.progress {
+  position: fixed; left: 0; top: env(safe-area-inset-top, 0px); width: 100%; height: 2px; z-index: 30;
+  background: linear-gradient(90deg, var(--plum), var(--teal)); transform-origin: 0 50%; transform: scaleX(0);
+}
+.nav a { position: relative; transition: color .2s ease; }
+.nav a.active { color: var(--ink); }
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px;
+  background: var(--plum); transform: scaleX(0); transition: transform .25s ease;
+}
+.nav a.active::after, .nav a:hover::after { transform: scaleX(1); }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface);
+  color: var(--ink); display: grid; place-items: center; cursor: pointer; flex: none;
+  transition: transform .3s ease, border-color .2s ease;
+}
+.theme-btn:hover { border-color: var(--muted); transform: rotate(-15deg); }
+.theme-btn svg { width: 18px; height: 18px; }
+.theme-btn .moon { display: none; }
+.is-dark .theme-btn .sun { display: none; }
+.is-dark .theme-btn .moon { display: block; }
+@media (max-width: 860px) { .top .theme-btn { margin-left: auto; } .top .btn { margin-left: 0; } }
+.btn-primary { box-shadow: 0 6px 18px -8px var(--plum); }
+.btn-primary:hover { box-shadow: 0 10px 24px -8px var(--plum); }
+
+/* hero: blueprint dot grid + tilt */
+.hero { position: relative; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(color-mix(in srgb, var(--muted) 38%, transparent) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 72% 45%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 60% 70% at 72% 45%, #000 25%, transparent 75%);
+}
+.hero .wrap { position: relative; }
+.hero-visual { perspective: 1400px; }
+.hero-visual .win.front { transition: transform .5s cubic-bezier(.2, .7, .2, 1); transform-style: preserve-3d; }
+.live {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+  font: 500 10.5px/1 var(--f-mono); color: var(--s-ok); letter-spacing: .04em; text-transform: uppercase;
+}
+.live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--s-ok); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgb(40 167 69 / .45); } 50% { box-shadow: 0 0 0 5px rgb(40 167 69 / 0); } }
+.bar i { transition: width .8s cubic-bezier(.2, .7, .2, 1); }
+.statusbar span { transition: background .35s ease, color .35s ease, border-color .35s ease; }
+.statusbar span.done-on { background: var(--s-ok-soft); color: var(--s-ok); border-color: var(--s-ok); font-weight: 600; }
+.tick { animation: tick .9s ease-out; }
+@keyframes tick { from { background: var(--s-info-soft); } to { background: transparent; } }
+
+/* apps + service cards */
+.app { transition: transform .2s ease, border-color .2s ease; }
+.app:hover { transform: translateY(-2px); border-color: var(--plum); }
+.svc { position: relative; overflow: hidden; }
+.svc::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s ease;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--plum) 13%, transparent), transparent 65%);
+}
+.svc:hover::before { opacity: 1; }
+.svc > * { position: relative; }
+
+/* gallery transition */
+.g-panel:not([hidden]) { animation: panel-in .45s cubic-bezier(.2, .7, .2, 1); }
+@keyframes panel-in { from { opacity: .35; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* process detail */
+.stage-detail {
+  margin-top: 32px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 12px 32px;
+  padding: 26px 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow);
+}
+.stage-detail .meta { display: grid; gap: 6px; align-content: start; }
+.stage-num { font: 500 12px/1 var(--f-mono); color: var(--teal); text-transform: uppercase; letter-spacing: .08em; }
+.stage-detail h3 { font-size: 24px; font-weight: 700; }
+.stage-detail ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px; }
+.stage-detail li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px; font-size: 15px; }
+.stage-detail li::before { content: "✓"; color: var(--teal); font-weight: 700; }
+.stage-detail .swap { animation: panel-in .4s cubic-bezier(.2, .7, .2, 1); }
+@media (max-width: 720px) { .stage-detail { grid-template-columns: minmax(0, 1fr); } .stage-detail ul { grid-template-columns: minmax(0, 1fr); } }
+
+/* experience timeline */
+.xp { position: relative; padding-left: 30px; }
+.xp::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--plum), var(--line) 40%); border-radius: 2px; }
+.job { position: relative; }
+.job::before {
+  content: ""; position: absolute; left: -30px; top: 34px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--plum);
+}
+.job:first-child::before { background: var(--plum); box-shadow: 0 0 0 5px var(--plum-soft); }
+
+/* toast */
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 40;
+  transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 500;
+  transition: opacity .25s ease, transform .25s ease; box-shadow: var(--shadow);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* contact form */
+.contact-card { gap: 18px; }
+#contact-form { display: grid; gap: 14px; }
+.f-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+@media (max-width: 520px) { .f-two { grid-template-columns: minmax(0, 1fr); } }
+.fl { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
+.fl .opt { font-weight: 400; color: var(--muted); }
+.fl input, .fl select, .fl textarea {
+  width: 100%; font: 400 15px/1.4 var(--f-body); color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; transition: border-color .2s ease, box-shadow .2s ease;
+}
+.fl textarea { resize: vertical; min-height: 104px; }
+.fl input:focus, .fl select:focus, .fl textarea:focus { outline: none; border-color: var(--plum); box-shadow: 0 0 0 3px var(--plum-soft); }
+.fl input[aria-invalid="true"], .fl textarea[aria-invalid="true"] { border-color: #c0392b; }
+.honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+#cf-submit { justify-self: start; }
+#cf-submit[disabled] { opacity: .65; cursor: progress; }
+.form-status { font-size: 14px; min-height: 1.4em; }
+.form-status.ok { color: var(--teal); font-weight: 600; }
+.form-status.err { color: var(--ink); }
+.or { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-family: var(--f-mono); }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* floating WhatsApp button */
+.wa-float {
+  position: fixed; z-index: 35;
+  right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px 12px 14px; border-radius: 999px;
+  background: #1f8f4e; color: #ffffff; text-decoration: none; font: 600 14px/1 var(--f-body);
+  box-shadow: 0 10px 28px -10px rgb(31 143 78 / .8); transition: transform .2s ease, box-shadow .2s ease;
+}
+.wa-float:hover { transform: translateY(-2px); box-shadow: 0 14px 32px -10px rgb(31 143 78 / .9); }
+.wa-float svg { width: 20px; height: 20px; }
+@media (max-width: 520px) { .wa-float span { display: none; } .wa-float { padding: 14px; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-mark">MA</span>Muhammad Asfiyan</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#services">Services</a>
+      <a href="#screens">Odoo apps</a>
+      <a href="#process">How I work</a>
+      <a href="#experience">Experience</a>
+    </nav>
+    <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch between light and dark theme">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <a class="btn btn-primary" href="#contact">Discuss your project</a>
+  </div>
+</header>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<main id="top">
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="role">Odoo Technical &amp; Functional Consultant · Python / ERP Developer</p>
+        <h1>Odoo that fits the way your business <em>actually runs</em>.</h1>
+        <p class="lede">I configure and extend Odoo for Manufacturing, Inventory and Point of Sale. I take a project from requirements and gap analysis through custom modules, integrations, user training and go-live.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Tell me about your Odoo setup</a>
+          <a class="btn btn-ghost" href="#experience">See my experience</a>
+        </div>
+        <div class="facts">
+          <div class="fact"><b>1.5+ yrs</b><span>hands-on Odoo ERP work</span></div>
+          <div class="fact"><b>10+</b><span>retail stores on POS I supported</span></div>
+          <div class="fact"><b>1,000+</b><span>daily POS transactions</span></div>
+          <div class="fact"><b>4</b><span>payment gateways integrated</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Illustration of an Odoo manufacturing order">
+        <!-- back window: work center kanban strip -->
+        <div class="win back" aria-hidden="true">
+          <div class="win-nav"><span class="grid-ico"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Inventory</b><span>Replenishment</span></div>
+          <div class="win-body">
+            <div class="tbl-wrap"><table class="s">
+              <tr><th>Product</th><th class="num">On hand</th><th class="num">Min</th><th class="num">Order</th></tr>
+              <tr><td>Oak plank 2m</td><td class="num red">18</td><td class="num">40</td><td class="num">60</td></tr>
+              <tr><td>Steel leg 72cm</td><td class="num">146</td><td class="num">80</td><td class="num muted-s">0</td></tr>
+              <tr><td>Varnish 1L</td><td class="num red">6</td><td class="num">12</td><td class="num">24</td></tr>
+            </table></div>
+          </div>
+        </div>
+        <!-- front window: manufacturing order -->
+        <div class="win front">
+          <div class="win-nav"><span class="grid-ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Manufacturing</b><span>Overview</span><span>Operations</span><span class="hide-sm">Planning</span><span class="hide-sm">Products</span></div>
+          <div class="win-cp">
+            <span class="crumb">Manufacturing Orders / <b>WH/MO/00042</b></span>
+            <span class="statusbar" id="mo-status"><span>Draft</span><span>Confirmed</span><span class="on">In Progress</span><span class="hide-sm">To Close</span><span>Done</span></span>
+          </div>
+          <div class="win-cp">
+            <span class="s-btn primary">Produce All</span><span class="s-btn">Unbuild</span><span class="s-btn">Scrap</span>
+            <span class="live" title="Animated illustration with demo data">Live demo</span>
+          </div>
+          <div class="win-body">
+            <div class="sheet">
+              <div class="ref">WH/MO/00042</div>
+              <div class="fields">
+                <dl class="fld"><dt>Product</dt><dd><a>[TBL-180] Oak Dining Table</a></dd></dl>
+                <dl class="fld"><dt>Scheduled</dt><dd>18/11/2026 08:00</dd></dl>
+                <dl class="fld"><dt>Quantity</dt><dd><span id="mo-qty">12.00</span> / 20.00 Units</dd></dl>
+                <dl class="fld"><dt>Bill of Material</dt><dd><a>Oak Table · Standard</a></dd></dl>
+              </div>
+              <div class="tabs-s"><span class="on">Components</span><span>Work Orders</span><span class="hide-sm">Miscellaneous</span></div>
+              <div class="tbl-wrap"><table class="s">
+                <tr><th>Component</th><th class="num">To Consume</th><th class="num">Consumed</th><th class="hide-sm">Progress</th></tr>
+                <tr class="mo-line" data-rate="2" data-total="40"><td>Oak plank 2m</td><td class="num">40.00</td><td class="num">24.00</td><td class="hide-sm"><div class="bar"><i style="width:60%"></i></div></td></tr>
+                <tr class="mo-line" data-rate="4" data-total="80"><td>Steel leg 72cm</td><td class="num">80.00</td><td class="num">48.00</td><td class="hide-sm"><div class="bar"><i style="width:60%"></i></div></td></tr>
+                <tr class="mo-line" data-rate="16" data-total="320"><td>Wood screw M6 <span class="muted-s">(Lot L-2611)</span></td><td class="num">320.00</td><td class="num">192.00</td><td class="hide-sm"><div class="bar"><i style="width:60%"></i></div></td></tr>
+                <tr class="mo-line" data-rate="0.625" data-total="10"><td>Varnish 1L</td><td class="num">10.00</td><td class="num red">7.50</td><td class="hide-sm"><div class="bar"><i style="width:75%"></i></div></td></tr>
+              </table></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= APPS ================= -->
+  <section class="section" style="padding-block: 48px;">
+    <div class="wrap">
+      <span class="eyebrow">Odoo apps I work in</span>
+      <div class="apps">
+        <span class="app"><i style="background:#c0587e">M</i>Manufacturing <small>BoM · Work orders</small></span>
+        <span class="app"><i style="background:#d08b2c">I</i>Inventory <small>Routes · Lots · Valuation</small></span>
+        <span class="app"><i style="background:#3f8f6b">P</i>Point of Sale <small>Multi-store</small></span>
+        <span class="app"><i style="background:#5b6bbf">P</i>Payroll <small>Salary rules</small></span>
+        <span class="app"><i style="background:#2c8fa6">S</i>Sales</span>
+        <span class="app"><i style="background:#8a63b5">P</i>Purchase</span>
+        <span class="app"><i style="background:#6c7a3a">A</i>Accounting <small>integration</small></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What I can do for you</span>
+        <h2>Start from the problem, then build the Odoo that solves it.</h2>
+        <p>Standard Odoo covers a lot. When it doesn't match your process, I configure what exists first and write custom modules only for the real gaps.</p>
+      </div>
+      <div class="services">
+        <article class="svc">
+          <span class="q">"Production doesn't match the system."</span>
+          <h3>Manufacturing (MRP)</h3>
+          <p>I map your production flow into Odoo, from raw material procurement through work orders and quality checks to finished-goods receipt.</p>
+          <ul><li>Multi-level BoMs</li><li>Work centers</li><li>Routings</li><li>Production planning</li></ul>
+        </article>
+        <article class="svc">
+          <span class="q">"Stock in Odoo is never right."</span>
+          <h3>Inventory &amp; warehouses</h3>
+          <p>I set up multi-warehouse operations with the right routes and rules, and build custom transfer flows, validations and reports where you need them.</p>
+          <ul><li>Push/pull rules</li><li>Reordering</li><li>Lot/serial tracking</li><li>Stock valuation</li></ul>
+        </article>
+        <article class="svc">
+          <span class="q">"Our stores need more than standard POS."</span>
+          <h3>Point of Sale</h3>
+          <p>I build custom POS features for multi-store retail, such as discount rules, OTP validation and payment gateway integration, on both the front end and the backend.</p>
+          <ul><li>OWL / JavaScript</li><li>Discount logic</li><li>OTP validation</li><li>Payments</li></ul>
+        </article>
+        <article class="svc">
+          <span class="q">"We type the same data into two systems."</span>
+          <h3>Integrations &amp; webhooks</h3>
+          <p>I connect Odoo to payment, delivery and third-party systems through REST APIs and webhooks, so data moves automatically and failures are visible.</p>
+          <ul><li>REST APIs</li><li>Webhooks</li><li>Shipment tracking</li><li>Refund automation</li></ul>
+        </article>
+        <article class="svc">
+          <span class="q">"Payroll still lives in a spreadsheet."</span>
+          <h3>Payroll</h3>
+          <p>I set up salary structures and rules that reflect your contracts, allowances and deductions, with payslip reports that your HR team can trust.</p>
+          <ul><li>Salary structures</li><li>Salary rules</li><li>Contracts</li><li>Payslip reports</li></ul>
+        </article>
+        <article class="svc">
+          <span class="q">"The right people should see the right data."</span>
+          <h3>Reports, access &amp; automation</h3>
+          <p>I build custom QWeb reports, set up security groups and record rules, and automate repetitive work with server actions and scheduled jobs.</p>
+          <ul><li>QWeb reports</li><li>Record rules</li><li>Server actions</li><li>Cron jobs</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCREENS ================= -->
+  <section class="section" id="screens">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Inside Odoo</span>
+        <h2>The screens your team will use every day.</h2>
+        <p>A look at the kinds of Odoo screens I configure and extend.</p>
+      </div>
+
+      <div class="gallery">
+        <div class="g-tabs" role="tablist" aria-label="Odoo apps">
+          <button class="g-tab" role="tab" id="tab-mrp" aria-controls="panel-mrp" aria-selected="true">Manufacturing<small>Work orders by work center</small></button>
+          <button class="g-tab" role="tab" id="tab-inv" aria-controls="panel-inv" aria-selected="false">Inventory<small>Multi-step delivery with lots</small></button>
+          <button class="g-tab" role="tab" id="tab-pos" aria-controls="panel-pos" aria-selected="false">Point of Sale<small>Discount approval at the till</small></button>
+          <button class="g-tab" role="tab" id="tab-pay" aria-controls="panel-pay" aria-selected="false">Payroll<small>Payslip computation</small></button>
+          <button class="g-tab" role="tab" id="tab-int" aria-controls="panel-int" aria-selected="false">Integrations<small>API and webhook log</small></button>
+        </div>
+
+        <div>
+          <!-- Manufacturing -->
+          <div class="g-panel" role="tabpanel" id="panel-mrp" aria-labelledby="tab-mrp">
+            <div class="win">
+              <div class="win-nav"><span class="grid-ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Manufacturing</b><span>Operations</span><span>Planning</span></div>
+              <div class="win-cp"><span class="crumb"><b>Work Orders</b></span><span class="s-btn">Group by: Work Center</span></div>
+              <div class="win-body">
+                <div class="sheet">
+                  <div class="tbl-wrap"><table class="s">
+                    <tr><th>Operation</th><th>Manufacturing Order</th><th class="hide-sm">Product</th><th class="num">Expected</th><th class="num">Real</th><th>Status</th></tr>
+                    <tr class="sub"><td colspan="6">CNC Router (2)</td></tr>
+                    <tr><td>Cut panels</td><td class="mono">WH/MO/00042</td><td class="hide-sm">Oak Dining Table</td><td class="num">02:00</td><td class="num">02:10</td><td><span class="pill ok">Finished</span></td></tr>
+                    <tr><td>Cut panels</td><td class="mono">WH/MO/00043</td><td class="hide-sm">Oak Side Table</td><td class="num">01:15</td><td class="num">00:00</td><td><span class="pill info">Ready</span></td></tr>
+                    <tr class="sub"><td colspan="6">Assembly Line 1 (2)</td></tr>
+                    <tr><td>Assemble frame</td><td class="mono">WH/MO/00042</td><td class="hide-sm">Oak Dining Table</td><td class="num">03:30</td><td class="num">01:48</td><td><span class="pill warn">In Progress</span></td></tr>
+                    <tr><td>Fit legs</td><td class="mono">WH/MO/00041</td><td class="hide-sm">Walnut Desk</td><td class="num">01:00</td><td class="num">01:05</td><td><span class="pill ok">Finished</span></td></tr>
+                    <tr class="sub"><td colspan="6">Paint Booth (1)</td></tr>
+                    <tr><td>Varnish &amp; dry</td><td class="mono">WH/MO/00042</td><td class="hide-sm">Oak Dining Table</td><td class="num">04:00</td><td class="num">00:00</td><td><span class="pill">Waiting</span></td></tr>
+                  </table></div>
+                </div>
+              </div>
+            </div>
+            <p class="caption">Routings split production into operations on specific work centers, so supervisors compare expected and real time per step, not just per order.</p>
+          </div>
+
+          <!-- Inventory -->
+          <div class="g-panel" role="tabpanel" id="panel-inv" aria-labelledby="tab-inv" hidden>
+            <div class="win">
+              <div class="win-nav"><span class="grid-ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Inventory</b><span>Operations</span><span>Products</span></div>
+              <div class="win-cp">
+                <span class="crumb">Transfers / <b>WH/PICK/00117</b></span>
+                <span class="statusbar"><span>Draft</span><span>Waiting</span><span class="on">Ready</span><span>Done</span></span>
+              </div>
+              <div class="win-cp"><span class="s-btn primary">Validate</span><span class="s-btn">Print</span><span class="s-btn">Unreserve</span></div>
+              <div class="win-body">
+                <div class="sheet">
+                  <div class="ref">WH/PICK/00117</div>
+                  <div class="fields">
+                    <dl class="fld"><dt>Customer</dt><dd><a>Northline Interiors</a></dd></dl>
+                    <dl class="fld"><dt>Source</dt><dd class="mono">S00318</dd></dl>
+                    <dl class="fld"><dt>Route</dt><dd>Pick → Pack → Ship</dd></dl>
+                    <dl class="fld"><dt>From</dt><dd>WH/Stock/Shelf B-04</dd></dl>
+                  </div>
+                  <div class="tabs-s"><span class="on">Operations</span><span>Additional Info</span></div>
+                  <div class="tbl-wrap"><table class="s">
+                    <tr><th>Product</th><th>Lot / Serial</th><th class="hide-sm">From</th><th class="num">Demand</th><th class="num">Quantity</th></tr>
+                    <tr><td>Oak Dining Table</td><td class="mono">SN-TBL-00981</td><td class="hide-sm">Shelf B-04</td><td class="num">1.00</td><td class="num">1.00</td></tr>
+                    <tr><td>Oak Dining Chair</td><td class="mono">LOT-CH-2611</td><td class="hide-sm">Shelf B-07</td><td class="num">6.00</td><td class="num">6.00</td></tr>
+                    <tr><td>Felt pads (set)</td><td class="muted-s">not tracked</td><td class="hide-sm">Bin A-12</td><td class="num">2.00</td><td class="num red">1.00</td></tr>
+                  </table></div>
+                </div>
+              </div>
+            </div>
+            <p class="caption">Multi-step routes, lot and serial tracking, and validation rules that stop a transfer from going out incomplete or with the wrong lot.</p>
+          </div>
+
+          <!-- POS -->
+          <div class="g-panel" role="tabpanel" id="panel-pos" aria-labelledby="tab-pos" hidden>
+            <div class="win">
+              <div class="win-nav"><b>Point of Sale</b><span>Store 04 · Register 2</span><span class="hide-sm">Cashier: Sara</span></div>
+              <div class="pos">
+                <div class="pos-order">
+                  <div class="pos-line"><b>Linen Shirt · Navy</b><span>89.00</span><small>1.00 Units × 89.00</small></div>
+                  <div class="pos-line"><b>Chino Trousers</b><span>129.00</span><small>1.00 Units × 129.00</small></div>
+                  <div class="pos-line sel"><b>Leather Belt</b><span>41.25</span><small>1.00 Units × 55.00 · 25% discount</small></div>
+                  <div class="pos-total"><span>Total</span><span>259.25</span></div>
+                </div>
+                <div class="pos-grid" aria-hidden="true">
+                  <div class="pos-tile"><i style="background:#d9e4f2"></i><div><b>Linen Shirt</b><span>89.00</span></div></div>
+                  <div class="pos-tile"><i style="background:#efe3d3"></i><div><b>Chino Trousers</b><span>129.00</span></div></div>
+                  <div class="pos-tile"><i style="background:#e7dad5"></i><div><b>Leather Belt</b><span>55.00</span></div></div>
+                  <div class="pos-tile"><i style="background:#dbe9df"></i><div><b>Cotton Polo</b><span>65.00</span></div></div>
+                  <div class="pos-tile"><i style="background:#ece6f1"></i><div><b>Wool Socks</b><span>19.00</span></div></div>
+                  <div class="pos-tile"><i style="background:#f3ecd7"></i><div><b>Canvas Tote</b><span>35.00</span></div></div>
+                </div>
+                <div class="pos-modal">
+                  <header>Manager approval needed</header>
+                  <div class="body">
+                    <span>Discount of <b>25%</b> exceeds your limit of <b>15%</b>.</span>
+                    <span class="muted-s">Enter a manager PIN to approve.</span>
+                    <div class="pin"><i></i><i></i><i class="e"></i><i class="e"></i></div>
+                  </div>
+                  <footer><span class="s-btn">Cancel</span><span class="s-btn primary">Approve</span></footer>
+                </div>
+              </div>
+            </div>
+            <p class="caption">POS customizations run in the till (OWL / JavaScript) and are validated again on the server, so a rule can't be bypassed from the browser.</p>
+          </div>
+
+          <!-- Payroll -->
+          <div class="g-panel" role="tabpanel" id="panel-pay" aria-labelledby="tab-pay" hidden>
+            <div class="win">
+              <div class="win-nav"><span class="grid-ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Payroll</b><span>Payslips</span><span>Contracts</span></div>
+              <div class="win-cp">
+                <span class="crumb">Payslips / <b>SLIP/2026/11/0042</b></span>
+                <span class="statusbar"><span>Draft</span><span class="on">Waiting</span><span>Done</span><span class="hide-sm">Paid</span></span>
+              </div>
+              <div class="win-body">
+                <div class="sheet">
+                  <div class="fields">
+                    <dl class="fld"><dt>Employee</dt><dd><a>Demo Employee</a></dd></dl>
+                    <dl class="fld"><dt>Period</dt><dd>01/11/2026 – 30/11/2026</dd></dl>
+                    <dl class="fld"><dt>Structure</dt><dd>Monthly · Factory Staff</dd></dl>
+                    <dl class="fld"><dt>Contract</dt><dd>Permanent · Full time</dd></dl>
+                  </div>
+                  <div class="tabs-s"><span>Worked Days</span><span class="on">Salary Computation</span></div>
+                  <div class="tbl-wrap"><table class="s">
+                    <tr><th>Rule</th><th class="hide-sm">Category</th><th class="num">Amount (PKR)</th></tr>
+                    <tr><td>Basic Salary</td><td class="hide-sm">Basic</td><td class="num">120,000</td></tr>
+                    <tr><td>House Rent Allowance</td><td class="hide-sm">Allowance</td><td class="num">54,000</td></tr>
+                    <tr><td>Conveyance Allowance</td><td class="hide-sm">Allowance</td><td class="num">8,000</td></tr>
+                    <tr><td>Overtime (12 h)</td><td class="hide-sm">Allowance</td><td class="num">13,500</td></tr>
+                    <tr class="sub"><td>Gross</td><td class="hide-sm"></td><td class="num">195,500</td></tr>
+                    <tr><td>Income Tax</td><td class="hide-sm">Deduction</td><td class="num red">−9,775</td></tr>
+                    <tr><td>Loan Installment</td><td class="hide-sm">Deduction</td><td class="num red">−10,000</td></tr>
+                    <tr class="total"><td>Net Salary</td><td class="hide-sm"></td><td class="num">175,725</td></tr>
+                  </table></div>
+                </div>
+              </div>
+            </div>
+            <p class="caption">Salary rules compute allowances and deductions from the contract and the worked days, so every payslip line can be traced back to a rule.</p>
+          </div>
+
+          <!-- Integrations -->
+          <div class="g-panel" role="tabpanel" id="panel-int" aria-labelledby="tab-int" hidden>
+            <div class="win">
+              <div class="win-nav"><span class="grid-ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Inventory</b><span>Configuration</span><span>Integration Logs</span></div>
+              <div class="win-cp"><span class="crumb"><b>API Logs</b></span><span class="s-btn">Filter: Last 24 hours</span></div>
+              <div class="win-body">
+                <div class="sheet">
+                  <div class="tbl-wrap"><table class="s">
+                    <tr><th>Time</th><th>Direction</th><th>Call</th><th class="num">HTTP</th><th class="num hide-sm">ms</th><th>Result</th></tr>
+                    <tr><td class="mono">10:42:07</td><td>Odoo → Courier</td><td class="mono">POST /v1/shipments</td><td class="num">201</td><td class="num hide-sm">412</td><td><span class="pill ok">Booked</span></td></tr>
+                    <tr><td class="mono">10:44:51</td><td>Courier → Odoo</td><td class="mono">webhook in_transit</td><td class="num">200</td><td class="num hide-sm">38</td><td><span class="pill ok">Applied</span></td></tr>
+                    <tr><td class="mono">10:45:02</td><td>Courier → Odoo</td><td class="mono">webhook in_transit</td><td class="num">200</td><td class="num hide-sm">11</td><td><span class="pill info">Duplicate</span></td></tr>
+                    <tr><td class="mono">11:03:19</td><td>Odoo → Gateway</td><td class="mono">POST /payments/refund</td><td class="num">503</td><td class="num hide-sm">15000</td><td><span class="pill warn">Retry 11:07</span></td></tr>
+                    <tr><td class="mono">11:07:20</td><td>Odoo → Gateway</td><td class="mono">POST /payments/refund</td><td class="num">200</td><td class="num hide-sm">622</td><td><span class="pill ok">Refunded</span></td></tr>
+                    <tr><td class="mono">11:31:45</td><td>Odoo → Courier</td><td class="mono">POST /v1/shipments</td><td class="num">422</td><td class="num hide-sm">207</td><td><span class="pill danger">Needs attention</span></td></tr>
+                  </table></div>
+                </div>
+              </div>
+            </div>
+            <p class="caption">Every call in and out is logged. Temporary failures retry on their own, duplicate webhooks are ignored, and anything that needs a person is clearly flagged.</p>
+          </div>
+        </div>
+      </div>
+      <p class="note">Screens are illustrations built with demo data. Client systems and data stay confidential.</p>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How I work</span>
+        <h2>From the first conversation to go-live, and after.</h2>
+        <p>Technical and functional work in one person, so nothing gets lost between the people who understand your business and the people who write the code.</p>
+      </div>
+      <div class="process" role="tablist" aria-label="Project stages">
+        <div class="step on"><button class="chev" type="button" role="tab" aria-selected="true" aria-controls="stage-detail">Requirements</button><p>I learn how your team works today and what has to change.</p></div>
+        <div class="step"><button class="chev" type="button" role="tab" aria-selected="false" aria-controls="stage-detail">Gap analysis</button><p>I separate what Odoo does out of the box from what needs custom work.</p></div>
+        <div class="step"><button class="chev" type="button" role="tab" aria-selected="false" aria-controls="stage-detail">Build</button><p>I configure first, then develop custom modules for the real gaps.</p></div>
+        <div class="step"><button class="chev" type="button" role="tab" aria-selected="false" aria-controls="stage-detail">Test</button><p>I test end to end with your real scenarios before anyone relies on it.</p></div>
+        <div class="step"><button class="chev" type="button" role="tab" aria-selected="false" aria-controls="stage-detail">Train</button><p>I train your users and leave process documentation behind.</p></div>
+        <div class="step"><button class="chev" type="button" role="tab" aria-selected="false" aria-controls="stage-detail">Go-live</button><p>I support the launch and fix issues after it.</p></div>
+      </div>
+      <div class="stage-detail" id="stage-detail" role="tabpanel" aria-live="polite">
+        <div class="meta">
+          <span class="stage-num" id="stage-num">Stage 1 of 6</span>
+          <h3 id="stage-title">Requirements</h3>
+        </div>
+        <ul id="stage-list">
+          <li>Walkthroughs of how each team works today</li>
+          <li>Business processes mapped step by step</li>
+          <li>Pain points and must-haves agreed with you</li>
+          <li>Clear scope before any development starts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Experience</span>
+        <h2>Where I've done this work.</h2>
+      </div>
+      <div class="xp">
+        <article class="job">
+          <div class="when"><b>Current</b>Mar 2026 – Present</div>
+          <div>
+            <h3>Odoo Technical &amp; Functional Consultant</h3>
+            <p class="org">PAZ Technologies</p>
+            <ul>
+              <li>Implement and customize Odoo Manufacturing end to end: multi-level BoMs, work centers, routings, work orders and production planning.</li>
+              <li>Map manufacturing processes from raw material procurement through production and quality checks to finished-goods receipt.</li>
+              <li>Configure and extend Inventory: multi-warehouse setups, routes, push/pull and reordering rules, lot/serial tracking, stock valuation, and custom transfer flows and reports.</li>
+              <li>Set up Payroll: salary structures and rules, contracts, allowances, deductions and payslip reports.</li>
+              <li>Gather requirements, run gap analysis, train end users, write process documentation and support go-live.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">Jul 2025 – Mar 2026</div>
+          <div>
+            <h3>Odoo Technical Consultant</h3>
+            <p class="org">Prodo</p>
+            <ul>
+              <li>Built custom Odoo POS features, including an advanced discount engine and OTP-based validation.</li>
+              <li>Supported POS deployments across 10+ stores handling 1,000+ daily transactions.</li>
+              <li>Integrated 4 payment gateways (Tabby, Tamara, PayTabs, Intersoft) into Odoo POS and ERP.</li>
+              <li>Developed a Redbox delivery integration with webhooks for real-time shipment creation and tracking.</li>
+              <li>Automated refund, return and validation processes. Delivered ERP customizations, workflow automation and QWeb reports for 5+ clients.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="when">Feb 2025 – Jun 2025</div>
+          <div>
+            <h3>Python Developer / Odoo Trainee</h3>
+            <p class="org">Affinity Business Suite</p>
+            <ul>
+              <li>Helped develop 5+ Odoo modules and customizations with Python, XML and the Odoo ORM.</li>
+              <li>Worked on POS and ERP workflows and tested third-party device and API integrations.</li>
+              <li>Worked with Linux, PostgreSQL, and Odoo deployment and server management.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job minor">
+          <div class="when">May 2022 – Oct 2024</div>
+          <div>
+            <h3>Research Intern</h3>
+            <p class="org">Microelectronics Research Lab, NED University</p>
+            <ul><li>RISC-V architecture research, system design, hardware-software integration, and structured testing and verification.</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTEGRATIONS + TOOLKIT ================= -->
+  <section class="section">
+    <div class="wrap two">
+      <div>
+        <span class="eyebrow">Integrations delivered</span>
+        <h2 style="font-size: clamp(26px, 3vw, 34px); margin-bottom: 24px;">Systems I've connected to Odoo</h2>
+        <div class="int-list">
+          <div class="int"><b>Tabby</b><span>Payments</span><p>Buy now, pay later in POS and ERP</p></div>
+          <div class="int"><b>Tamara</b><span>Payments</span><p>Buy now, pay later in POS and ERP</p></div>
+          <div class="int"><b>PayTabs</b><span>Payments</span><p>Card payment gateway</p></div>
+          <div class="int"><b>Intersoft</b><span>Payments</span><p>Payment integration</p></div>
+          <div class="int"><b>Redbox</b><span>Delivery</span><p>Shipment creation and tracking through webhooks</p></div>
+        </div>
+      </div>
+      <div class="kit">
+        <div>
+          <span class="eyebrow">Toolkit</span>
+          <h2 style="font-size: clamp(26px, 3vw, 34px); margin-bottom: 24px;">What I build with</h2>
+        </div>
+        <div><h3>Odoo development</h3><div class="chips"><span>Python</span><span>Odoo ORM</span><span>XML views</span><span>OWL</span><span>JavaScript</span><span>QWeb</span><span>REST APIs</span><span>Webhooks</span></div></div>
+        <div><h3>Configuration &amp; security</h3><div class="chips"><span>Security groups</span><span>Record rules</span><span>Server actions</span><span>Scheduled actions</span></div></div>
+        <div><h3>Infrastructure &amp; tools</h3><div class="chips"><span>PostgreSQL</span><span>SQL</span><span>Linux</span><span>Docker</span><span>Odoo.sh</span><span>Git / GitHub</span><span>Postman</span><span>PyCharm</span><span>VS Code</span></div></div>
+        <div class="edu">
+          <b>BS Software Engineering</b>
+          <span>NED University of Engineering &amp; Technology · 2021 – 2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section contact" id="contact">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h2>Tell me what isn't working in your Odoo.</h2>
+        <p class="lede">A new implementation, a module that doesn't fit your process, or an integration you need: send me a short description and I'll reply with questions and a suggested approach.</p>
+      </div>
+      <div class="contact-card">
+        <form id="contact-form" novalidate>
+          <div class="f-two">
+            <label class="fl" for="cf-name">Name<input id="cf-name" name="name" type="text" autocomplete="name" required></label>
+            <label class="fl" for="cf-email">Email<input id="cf-email" name="email" type="email" autocomplete="email" required></label>
+          </div>
+          <label class="fl" for="cf-company">Company <span class="opt">(optional)</span><input id="cf-company" name="company" type="text" autocomplete="organization"></label>
+          <label class="fl" for="cf-topic">What do you need help with?
+            <select id="cf-topic" name="topic">
+              <option>New Odoo implementation</option>
+              <option>Manufacturing (MRP)</option>
+              <option>Inventory &amp; warehouse</option>
+              <option>Point of Sale</option>
+              <option>Integration or API</option>
+              <option>Payroll</option>
+              <option>Support or fixes</option>
+              <option>Something else</option>
+            </select>
+          </label>
+          <label class="fl" for="cf-message">Message<textarea id="cf-message" name="message" rows="4" required placeholder="Your Odoo version, the apps you use, and what you need."></textarea></label>
+          <input class="honey" id="cf-honey" name="_honey" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-primary" id="cf-submit" type="submit">Send message</button>
+          <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="or">or reach me directly</div>
+        <dl id="contact-list"></dl>
+        <p class="c-empty" id="contact-empty" hidden>Contact details coming soon.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<a class="wa-float" id="wa-float" href="https://wa.me/923212904274?text=Hi%20Asfiyan%2C%20I%20found%20your%20Odoo%20portfolio%20and%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c.3 1.6 1.9 3.6 4 4.4l1.2-1.1 1.8.8-.4 1.6c-3.4.4-7.3-3.3-7.4-6.4l1.6-.6.9 1.7z" fill="currentColor" stroke="none"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Muhammad Asfiyan</span>
+    <span>Odoo Technical &amp; Functional Consultant</span>
+  </div>
+</footer>
+
+<script>
+const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const FINE_POINTER = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+function showToast(text) {
+  const t = document.getElementById("toast");
+  t.textContent = text;
+  t.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+/* ---- Theme toggle (remembers the visitor's choice) ---- */
+(function theme() {
+  const root = document.documentElement;
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : media.matches;
+  const sync = () => root.classList.toggle("is-dark", isDark());
+  try { const saved = localStorage.getItem("theme"); if (saved) root.dataset.theme = saved; } catch (e) {}
+  sync();
+  media.addEventListener("change", sync);
+  new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  document.getElementById("theme-btn").addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+})();
+
+/* ---- Reading progress + active section in the menu ---- */
+(function scrollUi() {
+  const bar = document.getElementById("progress");
+  let ticking = false;
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
+    ticking = false;
+  };
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+
+  const links = [...document.querySelectorAll(".nav a")];
+  const byId = new Map(links.map(a => [a.getAttribute("href").slice(1), a]));
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { links.forEach(a => a.classList.remove("active")); byId.get(e.target.id)?.classList.add("active"); }
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  byId.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+})();
+
+/* ---- Hero: manufacturing order that "runs" ---- */
+(function liveMo() {
+  if (REDUCED) return;
+  const qtyEl = document.getElementById("mo-qty");
+  const states = [...document.querySelectorAll("#mo-status > span")];
+  const lines = [...document.querySelectorAll(".mo-line")];
+  const START = 12, END = 20;
+  let produced = START, hold = 0;
+
+  const setStatus = (i, done) => states.forEach((s, k) => {
+    s.classList.toggle("on", k === i && !done);
+    s.classList.toggle("done-on", k === i && done);
+  });
+  const render = () => {
+    qtyEl.textContent = produced.toFixed(2);
+    lines.forEach(row => {
+      const rate = parseFloat(row.dataset.rate), total = parseFloat(row.dataset.total);
+      const consumed = rate * produced;
+      const cell = row.children[2];
+      cell.textContent = consumed.toFixed(2);
+      cell.classList.toggle("red", consumed > total * produced / END + 0.001);
+      cell.classList.remove("tick"); void cell.offsetWidth; cell.classList.add("tick");
+      row.querySelector(".bar i").style.width = Math.min(consumed / total * 100, 100) + "%";
+    });
+  };
+  setInterval(() => {
+    if (document.hidden) return;
+    if (hold > 0) { hold--; return; }
+    if (produced < END) {
+      produced++; render();
+      if (produced === END) { setStatus(3); hold = 1; }
+    } else if (states[3].classList.contains("on")) {
+      setStatus(4, true); hold = 2;
+    } else {
+      produced = START; render(); setStatus(2);
+    }
+  }, 1500);
+})();
+
+/* ---- Hero: subtle 3D tilt following the mouse ---- */
+(function tilt() {
+  if (REDUCED || !FINE_POINTER) return;
+  const area = document.querySelector(".hero-visual");
+  const win = area.querySelector(".win.front");
+  area.addEventListener("pointermove", e => {
+    const r = area.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    win.style.transform = `rotateY(${x * 7}deg) rotateX(${-y * 6}deg) translateZ(0)`;
+  });
+  area.addEventListener("pointerleave", () => { win.style.transform = ""; });
+})();
+
+/* ---- Service cards: spotlight under the cursor ---- */
+(function spotlight() {
+  if (!FINE_POINTER) return;
+  document.querySelectorAll(".svc").forEach(card => {
+    card.addEventListener("pointermove", e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      card.style.setProperty("--my", `${e.clientY - r.top}px`);
+    });
+  });
+})();
+
+/* ---- How I work: clickable stages ---- */
+(function stages() {
+  const STAGES = [
+    ["Requirements", ["Walkthroughs of how each team works today", "Business processes mapped step by step", "Pain points and must-haves agreed with you", "Clear scope before any development starts"]],
+    ["Gap analysis", ["What standard Odoo already covers", "What needs configuration only", "What truly needs custom development", "An effort estimate for each gap"]],
+    ["Build", ["Odoo apps configured to your process", "Custom modules for the real gaps", "Access rights and record rules per role", "Integrations with your other systems"]],
+    ["Test", ["End-to-end scenarios with your data", "Edge cases and permissions checked", "Fixes before users depend on it", "Sign-off from your key users"]],
+    ["Train", ["Training by role: warehouse, production, cashier, HR", "Written process documentation", "Answers to your team's real questions", "Confidence before the switch"]],
+    ["Go-live", ["Support on launch day", "Post-launch fixes", "Adjustments once real usage starts", "A clean handover"]]
+  ];
+  const steps = [...document.querySelectorAll(".process .step")];
+  const detail = document.getElementById("stage-detail");
+  const num = document.getElementById("stage-num"), title = document.getElementById("stage-title"), list = document.getElementById("stage-list");
+  steps.forEach((step, i) => {
+    const btn = step.querySelector("button");
+    btn.addEventListener("click", () => {
+      steps.forEach((s, k) => { s.classList.toggle("on", k === i); s.querySelector("button").setAttribute("aria-selected", String(k === i)); });
+      num.textContent = `Stage ${i + 1} of ${STAGES.length}`;
+      title.textContent = STAGES[i][0];
+      list.replaceChildren(...STAGES[i][1].map(text => { const li = document.createElement("li"); li.textContent = text; return li; }));
+      detail.classList.remove("swap"); void detail.offsetWidth; detail.classList.add("swap");
+    });
+  });
+})();
+
+/* ===== Edit your contact details here. Empty values are hidden. ===== */
+const CONTACT = {
+  email:    "asfiyanshivani0321@gmail.com",  // also receives the contact form
+  whatsapp: "+92 321 2904274",
+  linkedin: "",   // full URL
+  upwork:   "",   // full URL
+  github:   ""    // full URL
+};
+const WA_LINK = "https://wa.me/" + CONTACT.whatsapp.replace(/\D/g, "");
+
+(function contact() {
+  const list = document.getElementById("contact-list");
+  const rows = [
+    ["Email", CONTACT.email, null, true],
+    ["WhatsApp", CONTACT.whatsapp, WA_LINK, true],
+    ["LinkedIn", CONTACT.linkedin, CONTACT.linkedin, false],
+    ["Upwork", CONTACT.upwork, CONTACT.upwork, false],
+    ["GitHub", CONTACT.github, CONTACT.github, false]
+  ].filter(r => r[1]);
+  if (!rows.length) { document.getElementById("contact-empty").hidden = false; return; }
+  for (const [label, value, href, copyable] of rows) {
+    const row = document.createElement("div"); row.className = "c-row";
+    const dt = document.createElement("dt"); dt.textContent = label;
+    const dd = document.createElement("dd");
+    if (href) {
+      const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = /^https?:/.test(value) ? value.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "") : value; dd.appendChild(a);
+    } else { dd.textContent = value; }
+    row.append(dt, dd);
+    if (copyable) {
+      const b = document.createElement("button"); b.className = "copy"; b.type = "button"; b.textContent = "Copy";
+      b.addEventListener("click", () => {
+        const done = () => { b.textContent = "Copied"; showToast(label + " copied to clipboard"); setTimeout(() => (b.textContent = "Copy"), 1600); };
+        const fallback = () => { const r = document.createRange(); r.selectNodeContents(dd); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+        try { navigator.clipboard.writeText(value).then(done, fallback); } catch (e) { fallback(); }
+      });
+      row.appendChild(b);
+    } else { row.appendChild(document.createElement("span")); }
+    list.appendChild(row);
+  }
+})();
+
+/* ---- Contact form → email (via FormSubmit, no backend needed) ---- */
+(function contactForm() {
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("cf-status");
+  const submit = document.getElementById("cf-submit");
+  const field = id => document.getElementById(id);
+  const fallback = `You can also email ${CONTACT.email} or message me on WhatsApp at ${CONTACT.whatsapp}.`;
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    status.className = "form-status"; status.textContent = "";
+    const name = field("cf-name"), email = field("cf-email"), message = field("cf-message");
+    let firstBad = null;
+    [[name, v => v.trim().length > 1], [email, v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())], [message, v => v.trim().length > 9]]
+      .forEach(([el, ok]) => { const bad = !ok(el.value); el.setAttribute("aria-invalid", String(bad)); if (bad && !firstBad) firstBad = el; });
+    if (firstBad) {
+      status.classList.add("err");
+      status.textContent = "Please add your name, a valid email and a short message (at least 10 characters).";
+      firstBad.focus();
+      return;
+    }
+    if (field("cf-honey").value) return; // spam bot filled the hidden field
+
+    submit.disabled = true; submit.textContent = "Sending…";
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/" + CONTACT.email, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          name: name.value.trim(),
+          email: email.value.trim(),
+          company: field("cf-company").value.trim(),
+          topic: field("cf-topic").value,
+          message: message.value.trim(),
+          _replyto: email.value.trim(),
+          _subject: `Odoo portfolio enquiry: ${field("cf-topic").value} (${name.value.trim()})`,
+          _template: "table",
+          _captcha: "false"
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || String(data.success) !== "true") throw new Error(data.message || "Send failed");
+      form.reset();
+      status.classList.add("ok");
+      status.textContent = "Thanks, your message was sent. I'll reply by email, usually within one working day.";
+      showToast("Message sent");
+    } catch (err) {
+      status.classList.add("err");
+      status.textContent = "The message couldn't be sent from this page. " + fallback;
+    } finally {
+      submit.disabled = false; submit.textContent = "Send message";
+    }
+  });
+})();
+
+(function tabs() {
+  const tabs = [...document.querySelectorAll(".g-tab")];
+  function select(tab, focus) {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach((t, i) => {
+    t.tabIndex = i === 0 ? 0 : -1;
+    t.addEventListener("click", () => select(t));
+    t.addEventListener("keydown", e => {
+      const keys = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+      if (keys[e.key]) { e.preventDefault(); select(tabs[(i + keys[e.key] + tabs.length) % tabs.length], true); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
