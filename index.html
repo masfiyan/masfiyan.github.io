@@ -127,9 +127,9 @@ p { margin: 0; }
 .role { font: 500 13px/1.4 var(--f-mono); color: var(--muted); letter-spacing: .02em; }
 .lede { font-size: 18px; color: var(--muted); max-width: 34em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); margin-top: 6px; }
-.fact { padding: 16px 12px 0 0; display: grid; gap: 2px; }
-.fact b { font: 700 26px/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
+.facts { display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; column-gap: 22px; border-top: 1px solid var(--line); margin-top: 6px; }
+.fact { padding-top: 16px; display: grid; gap: 2px; align-content: start; }
+.fact b { font: 700 clamp(20px, 1.9vw, 26px)/1.1 var(--f-display); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .fact span { font-size: 12.5px; color: var(--muted); line-height: 1.35; }
 .hero-visual { position: relative; min-width: 0; padding: 0 0 36px 36px; }
 .hero-visual .win.back {
@@ -141,7 +141,7 @@ p { margin: 0; }
   .hero-visual { padding: 0; }
   .hero-visual .win.back { display: none; }
 }
-@media (max-width: 520px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; } }
+@media (max-width: 520px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; row-gap: 12px; } .fact b { font-size: 24px; } }
 
 /* ---------- Odoo screen mockups ---------- */
 .win {
@@ -561,7 +561,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   <!-- ================= APPS ================= -->
   <section class="section" style="padding-block: 48px;">
     <div class="wrap">
-      <span class="eyebrow">Odoo apps I work in</span>
+      <span class="eyebrow">Odoo apps I specilized work in</span>
       <div class="apps">
         <span class="app"><i style="background:#c0587e">M</i>Manufacturing <small>BoM · Work orders</small></span>
         <span class="app"><i style="background:#d08b2c">I</i>Inventory <small>Routes · Lots · Valuation</small></span>
